@@ -21,7 +21,7 @@ FROM
 ORDER BY 
     carbon_footprint_pcf DESC
 LIMIT 10
-
+'''
 ## Question 2: What are the industry groups of these products?
 | product_name                                                                                                                       | carbon_footprint_pcf | industry_group                     | 
 | ---------------------------------------------------------------------------------------------------------------------------------: | -------------------: | ---------------------------------: | 
@@ -74,7 +74,7 @@ GROUP BY
 ORDER BY 
     total_carbon_emissions DESC
 LIMIT 10
-
+'''
 ## Question 4: What are the companies with the highest contribution to carbon emissions?
 | company_name                            | total_carbon_emissions | 
 | --------------------------------------: | ---------------------: | 
@@ -101,7 +101,7 @@ GROUP BY
 ORDER BY 
     total_carbon_emissions DESC
 LIMIT 10
-
+'''
 ## Question 5: What are the countries with the highest contribution to carbon emissions?
 | country_name | total_carbon_emissions | 
 | -----------: | ---------------------: | 
@@ -128,7 +128,7 @@ GROUP BY
 ORDER BY 
     total_carbon_emissions DESC
 LIMIT 10
-
+'''
 ## Question 6: What is the trend of carbon footprints (PCFs) over the years?
 | year | total_carbon_emissions | 
 | ---: | ---------------------: | 
@@ -147,7 +147,7 @@ GROUP BY
     year
 ORDER BY 
     year ASC;
-
+'''
 ## Question 7: Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
 | industry_group                                                         | emissions_2013 | emissions_2014 | emissions_2015 | emissions_2016 | emissions_2017 | decrease_in_emissions | 
 | ---------------------------------------------------------------------: | -------------: | -------------: | -------------: | -------------: | -------------: | --------------------: | 
@@ -209,3 +209,4 @@ FROM
     EmissionsByYear
 ORDER BY 
     decrease_in_emissions DESC;
+'''
