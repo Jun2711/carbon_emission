@@ -21,7 +21,7 @@ FROM
 ORDER BY 
     carbon_footprint_pcf DESC
 LIMIT 10
-'''
+```
 ## Question 2: What are the industry groups of these products?
 | product_name                                                                                                                       | carbon_footprint_pcf | industry_group                     | 
 | ---------------------------------------------------------------------------------------------------------------------------------: | -------------------: | ---------------------------------: | 
@@ -35,7 +35,7 @@ LIMIT 10
 | TCDE                                                                                                                               | 99075                | Materials                          | 
 | Mercedes-Benz GLE (GLE 500 4MATIC)                                                                                                 | 91000                | Automobiles & Components           | 
 | Electric Motor                                                                                                                     | 87589                | Capital Goods                      | 
-'''
+```
 SELECT 
     pe.product_name, 
     pe.carbon_footprint_pcf, 
@@ -61,7 +61,7 @@ LIMIT 10
 | Chemicals                                        | 62369                  | 
 | Software & Services                              | 46544                  | 
 | Media                                            | 23017                  |
-'''
+```
 SELECT 
     ig.industry_group, 
     SUM(pe.carbon_footprint_pcf) AS total_carbon_emissions
@@ -74,7 +74,7 @@ GROUP BY
 ORDER BY 
     total_carbon_emissions DESC
 LIMIT 10
-'''
+```
 ## Question 4: What are the companies with the highest contribution to carbon emissions?
 | company_name                            | total_carbon_emissions | 
 | --------------------------------------: | ---------------------: | 
@@ -88,7 +88,7 @@ LIMIT 10
 | General Motors Company                  | 137007                 | 
 | "Lexmark International, Inc."           | 132012                 | 
 | "Daikin Industries, Ltd."               | 105600                 |
-'''
+```
 SELECT 
     c.company_name, 
     SUM(pe.carbon_footprint_pcf) AS total_carbon_emissions
@@ -101,7 +101,7 @@ GROUP BY
 ORDER BY 
     total_carbon_emissions DESC
 LIMIT 10
-'''
+```
 ## Question 5: What are the countries with the highest contribution to carbon emissions?
 | country_name | total_carbon_emissions | 
 | -----------: | ---------------------: | 
@@ -115,7 +115,7 @@ LIMIT 10
 | Netherlands  | 70417                  | 
 | Taiwan       | 62875                  | 
 | India        | 24574                  |
-'''
+```
 SELECT 
     co.country_name, 
     SUM(pe.carbon_footprint_pcf) AS total_carbon_emissions
@@ -128,7 +128,7 @@ GROUP BY
 ORDER BY 
     total_carbon_emissions DESC
 LIMIT 10
-'''
+```
 ## Question 6: What is the trend of carbon footprints (PCFs) over the years?
 | year | total_carbon_emissions | 
 | ---: | ---------------------: | 
@@ -137,7 +137,7 @@ LIMIT 10
 | 2015 | 10840415               | 
 | 2016 | 1640182                | 
 | 2017 | 340271                 |
-'''
+```
 SELECT 
     year, 
     SUM(carbon_footprint_pcf) AS total_carbon_emissions
@@ -147,7 +147,7 @@ GROUP BY
     year
 ORDER BY 
     year ASC;
-'''
+```
 ## Question 7: Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
 | industry_group                                                         | emissions_2013 | emissions_2014 | emissions_2015 | emissions_2016 | emissions_2017 | decrease_in_emissions | 
 | ---------------------------------------------------------------------: | -------------: | -------------: | -------------: | -------------: | -------------: | --------------------: | 
@@ -181,7 +181,7 @@ ORDER BY
 | Software & Services                                                    | 6              | 146            | 22856          | 22846          | 690            | -684                  | 
 | Materials                                                              | 200513         | 75678          | 0              | 88267          | 213137         | -12624                | 
 | Capital Goods                                                          | 60190          | 93699          | 3505           | 6369           | 94949          | -34759                |
-'''
+```
 WITH EmissionsByYear AS (
     SELECT 
         ig.industry_group, 
@@ -209,4 +209,4 @@ FROM
     EmissionsByYear
 ORDER BY 
     decrease_in_emissions DESC;
-'''
+```
