@@ -22,6 +22,8 @@ ORDER BY
     carbon_footprint_pcf DESC
 LIMIT 10
 ```
+Conclusion: Wind Turbine G128 5 Megawats contributes the most to carbon emission with 3718044.
+
 ## Question 2: What are the industry groups of these products?
 | product_name                                                                                                                       | carbon_footprint_pcf | industry_group                     | 
 | ---------------------------------------------------------------------------------------------------------------------------------: | -------------------: | ---------------------------------: | 
@@ -48,6 +50,7 @@ ORDER BY
     pe.carbon_footprint_pcf DESC
 LIMIT 10
 ```
+
 ## Question 3: What are the industries with the highest contribution to carbon emissions?
 | industry_group                                   | total_carbon_emissions | 
 | -----------------------------------------------: | ---------------------: | 
@@ -75,6 +78,8 @@ ORDER BY
     total_carbon_emissions DESC
 LIMIT 10
 ```
+Conclusion: Electrical Equipment and Machinery is highest contribution to carbon emission with 9801558.
+
 ## Question 4: What are the companies with the highest contribution to carbon emissions?
 | company_name                            | total_carbon_emissions | 
 | --------------------------------------: | ---------------------: | 
@@ -102,6 +107,8 @@ ORDER BY
     total_carbon_emissions DESC
 LIMIT 10
 ```
+Conclusion: Gamesa Corporación Tecnológica, S.A. is the company with the highest contribution to carbon emission with 9778464.
+
 ## Question 5: What are the countries with the highest contribution to carbon emissions?
 | country_name | total_carbon_emissions | 
 | -----------: | ---------------------: | 
@@ -129,6 +136,8 @@ ORDER BY
     total_carbon_emissions DESC
 LIMIT 10
 ```
+Conclusion: Spain is the countries with the highest contribution to carbon emission with 9786130.
+
 ## Question 6: What is the trend of carbon footprints (PCFs) over the years?
 | year | total_carbon_emissions | 
 | ---: | ---------------------: | 
@@ -148,6 +157,8 @@ GROUP BY
 ORDER BY 
     year ASC;
 ```
+Conclusion: The carbon footprint (PCF) trend showed an increase from 503,857 in 2013 to 10,840,415 in 2015, followed by a year-over-year decrease, eventually stabilizing at 340,271 in 2017.
+
 ## Question 7: Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
 | industry_group                                                         | emissions_2013 | emissions_2014 | emissions_2015 | emissions_2016 | emissions_2017 | decrease_in_emissions | 
 | ---------------------------------------------------------------------: | -------------: | -------------: | -------------: | -------------: | -------------: | --------------------: | 
@@ -210,3 +221,4 @@ FROM
 ORDER BY 
     decrease_in_emissions DESC;
 ```
+Conclusion: The Automobiles & Components industry group exhibited the most significant reduction in carbon footprints (PCFs) over the period from 2013 to 2017.
