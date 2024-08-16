@@ -47,7 +47,7 @@ JOIN
 ORDER BY 
     pe.carbon_footprint_pcf DESC
 LIMIT 10
-
+```
 ## Question 3: What are the industries with the highest contribution to carbon emissions?
 | industry_group                                   | total_carbon_emissions | 
 | -----------------------------------------------: | ---------------------: | 
