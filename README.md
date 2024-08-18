@@ -160,6 +160,7 @@ ORDER BY
 Conclusion: The carbon footprint (PCF) trend showed an increase from 503,857 in 2013 to 10,840,415 in 2015, followed by a year-over-year decrease, eventually stabilizing at 340,271 in 2017.
 
 ## Question 7: Which industry groups has demonstrated the most notable decrease in carbon footprints (PCFs) over time?
+
 | industry_group                                                         | emissions_2013 | emissions_2014 | emissions_2015 | emissions_2016 | emissions_2017 | decrease_in_emissions | 
 | ---------------------------------------------------------------------: | -------------: | -------------: | -------------: | -------------: | -------------: | --------------------: | 
 | Automobiles & Components                                               | 130189         | 230015         | 817227         | 1404833        | 0              | 130189                | 
@@ -221,4 +222,65 @@ FROM
 ORDER BY 
     decrease_in_emissions DESC;
 ```
-Conclusion: The Automobiles & Components industry group exhibited the most significant reduction in carbon footprints (PCFs) over the period from 2013 to 2017.
+Conclusion: The Automobiles & Components industry group showed the most significant reduction in carbon footprints (PCFs) over the period from 2013 (1st year) to 2017 (5th year). However, if we adjust our calculation to consider the year-over-year changes in carbon footprints (PCFs) rather than the total reduction between 2013 and 2017, the results would be as follows:
+| industry_group                                                         | emissions_2013 | emissions_2014 | emissions_2015 | emissions_2016 | emissions_2017 | decrease_in_emissions | 
+| ---------------------------------------------------------------------: | -------------: | -------------: | -------------: | -------------: | -------------: | --------------------: | 
+| Electrical Equipment and Machinery                                     | 0              | 0              | 9801558        | 0              | 0              | 9801558               | 
+| Automobiles & Components                                               | 130189         | 230015         | 817227         | 1404833        | 0              | 2321886               | 
+| Technology Hardware & Equipment                                        | 61100          | 167361         | 106157         | 1566           | 27592          | 241576                | 
+| Materials                                                              | 200513         | 75678          | 0              | 88267          | 213137         | 176569                | 
+| Capital Goods                                                          | 60190          | 93699          | 3505           | 6369           | 94949          | 138332                | 
+| "Food, Beverage & Tobacco"                                             | 4995           | 2685           | 0              | 100289         | 3162           | 101141                | 
+| Chemicals                                                              | 0              | 0              | 62369          | 0              | 0              | 62369                 | 
+| Software & Services                                                    | 6              | 146            | 22856          | 22846          | 690            | 46532                 | 
+| Energy                                                                 | 750            | 0              | 0              | 10024          | 0              | 9274                  | 
+| "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 0              | 0              | 8909           | 0              | 0              | 8909                  | 
+| "Mining - Iron, Aluminum, Other Metals"                                | 0              | 0              | 8181           | 0              | 0              | 8181                  | 
+| "Pharmaceuticals, Biotechnology & Life Sciences"                       | 32271          | 40215          | 0              | 0              | 0              | 7944                  | 
+| Media                                                                  | 9645           | 9645           | 1919           | 1808           | 0              | 3727                  | 
+| Containers & Packaging                                                 | 0              | 0              | 2988           | 0              | 0              | 2988                  | 
+| Commercial & Professional Services                                     | 1157           | 477            | 0              | 2890           | 741            | 2951                  | 
+| Tires                                                                  | 0              | 0              | 2022           | 0              | 0              | 2022                  | 
+| Consumer Durables & Apparel                                            | 2867           | 3280           | 0              | 1162           | 0              | 1575                  | 
+| Food & Staples Retailing                                               | 0              | 773            | 706            | 2              | 0              | 1481                  | 
+| "Consumer Durables, Household and Personal Products"                   | 0              | 0              | 931            | 0              | 0              | 931                   | 
+| "Textiles, Apparel, Footwear and Luxury Goods"                         | 0              | 0              | 387            | 0              | 0              | 387                   | 
+| Telecommunication Services                                             | 52             | 183            | 183            | 0              | 0              | 314                   | 
+| Trading Companies & Distributors and Commercial Services & Supplies    | 0              | 0              | 239            | 0              | 0              | 239                   | 
+| Food & Beverage Processing                                             | 0              | 0              | 141            | 0              | 0              | 141                   | 
+| Gas Utilities                                                          | 0              | 0              | 122            | 0              | 0              | 122                   | 
+| Semiconductors & Semiconductor Equipment                               | 0              | 50             | 0              | 4              | 0              | 54                    | 
+| Retailing                                                              | 0              | 19             | 11             | 0              | 0              | 30                    | 
+| Semiconductors & Semiconductors Equipment                              | 0              | 0              | 3              | 0              | 0              | 3                     | 
+| Tobacco                                                                | 0              | 0              | 1              | 0              | 0              | 1                     | 
+| Utilities                                                              | 122            | 0              | 0              | 122            | 0              | 0                     | 
+| Household & Personal Products                                          | 0              | 0              | 0              | 0              | 0              | 0                     | 
+```
+vWITH EmissionsByYear AS (
+    SELECT 
+        ig.industry_group, 
+        SUM(CASE WHEN pe.year = 2013 THEN pe.carbon_footprint_pcf ELSE 0 END) AS emissions_2013,
+        SUM(CASE WHEN pe.year = 2014 THEN pe.carbon_footprint_pcf ELSE 0 END) AS emissions_2014,
+        SUM(CASE WHEN pe.year = 2015 THEN pe.carbon_footprint_pcf ELSE 0 END) AS emissions_2015,
+        SUM(CASE WHEN pe.year = 2016 THEN pe.carbon_footprint_pcf ELSE 0 END) AS emissions_2016,
+        SUM(CASE WHEN pe.year = 2017 THEN pe.carbon_footprint_pcf ELSE 0 END) AS emissions_2017
+    FROM 
+        product_emissions pe
+    JOIN 
+        industry_groups ig ON pe.industry_group_id = ig.id
+    GROUP BY 
+        ig.industry_group
+)
+SELECT 
+    industry_group, 
+    emissions_2013, 
+    emissions_2014, 
+    emissions_2015, 
+    emissions_2016, 
+    emissions_2017,
+    -(emissions_2013 - emissions_2014 - emissions_2015 - emissions_2016 - emissions_2017) AS decrease_in_emissions
+FROM 
+    EmissionsByYear
+ORDER BY 
+    decrease_in_emissions DESC;
+```
